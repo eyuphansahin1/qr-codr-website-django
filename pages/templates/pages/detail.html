@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block style_css %}
+<link rel="stylesheet" href="{% static 'pages/css/style.css' %}">
+{% endblock style_css %}
+{% block search_nabvar %}
+{% load static %}
+<nav >
+    <div class="display-flex justify-content-center align-items-center mt-3 ">
+        <img class="img-fluid rounded" src="{% static 'img/logo2.jpg' %}" style="width: 150px; height: auto;" >
+    </div>
+</nav> {% endblock search_nabvar %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+<div class="container mb-5">
+  <div style="width:100%; height:100px; border-radius:10px; margin-top:1rem; background-image:linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.10) 10%, rgba(255,255,255,0) 100%), url({{category.image.url}}); background-size:cover; background-repeat:no-repeat; background-position:center center;"></div>
+  
+  <div style="display:flex; align-items:center; justify-content:space-between; mb-5" class="mt-3">
+    <!-- Sol ok -->
+    <div>
+      <a href="{% url 'index_lage' %}" style="color:black;">
+        <i class="fa-solid fa-arrow-left ms-1 fs-1"></i>
+      </a>
+    </div>
+    
+    <!-- Kategori adı ortada -->
+    <div style="flex-grow:1; text-align:center;">
+      <h1>{{ category.name }}</h1>
+    </div>
+  </div>
+  {% for product in products %}
+  <table class="table w-100 mt-2">
+    <tbody>
+      <tr>
+        <td class="border-bottom">
+          <b style="display:block;">{{product.name}}</b>
+          <span class="text-black-removed text-opacity-25" style="font-size:12px; line-height:16px; display:inline-grid; display:block; width: 90%;">{{product.description}}</span>
+        </td>
+        <td class="border-bottom text-nowrap text-end" width="1">
+          <div class="text-end">
+            <span class="text-muted opacity-70">    {% if product.person_type == "per_person" %} 
+              kişi Başı
+              {% else %}
+              &nbsp;  <!-- Non-breaking space to add spacing -->
+              &nbsp;  <!-- Non-breaking space to add spacing -->
+
+          {% endif %}</span>
+            &nbsp;<span style="width:80px; display:inline-block;">{{product.price}}	&#8364;</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endfor %}
+
+</div>
+   
+
+
+
+{% endblock content %}

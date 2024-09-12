@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block search_nabvar %}
+
+<nav >
+    <div class="display-flex justify-content-center align-items-center mt-3 ">
+        <img class="img-fluid rounded" src="{% static 'img/logo2.jpg' %}" style="width: 150px; height: auto;" >
+    </div>
+    <div class="container display-flex align-items-center justify-content-center flex-direction mt-4 ">
+        <div class="display-flex justify-content-center p-3  text-center bg-white rnd  shadow w-100 ">
+            <div class=" py-2" style="letter-spacing: 1em; ">HOŞ GELDİNİZ</div>
+            <br>
+        </div>
+        <form action="{% url 'search' %}" class="display-flex justify-content-center shadow align-items-center w-100 position-relative" >
+            <input class="form-control w-100 pt-2  " type="text" name="q"  placeholder="search..." >
+            <i class="fa-solid fa-magnifying-glass position-absolute" style="left:90%"></i>
+        </form>
+       
+    </div>
+
+</nav> {% endblock search_nabvar %}
+{% block style_css %}
+<link rel="stylesheet" href="{% static 'pages/css/style.css' %}">
+{% endblock style_css %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+    <div class="container mt-3  " style="margin-bottom:100px;">
+        <div class="display-flex gap-3 ">
+            {% for category in categories %}
+            <a class="card card-display" style="color:black;  text-decoration: none;" href="{% url 'products_by_category' category.slug %}">
+                <img class="img-fluid category-image border border-1 " src="{{category.image.url}}"  alt="{{category.name}}" style="height: 80%; width: 90%; " >
+                <b>{{category.name}}</b>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% block js_files %}
+<script src="{% static 'pages/js/script.js' %}"></script>
+
+{% endblock js_files %}
+{% endblock content %}
